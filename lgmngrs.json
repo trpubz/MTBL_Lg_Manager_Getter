@@ -1,0 +1,85 @@
+{
+  "schema":{
+    "fields":[
+      {
+        "name":"teamAbbreviation",
+        "type":"string"
+      },
+      {
+        "name":"teamName",
+        "type":"string"
+      },
+      {
+        "name":"teamOwner",
+        "type":"string"
+      },
+      {
+        "name":"avatarURL",
+        "type":"string"
+      }
+    ],
+    "pandas_version":"1.4.0"
+  },
+  "data":[
+    {
+      "teamAbbreviation":"PEWB",
+      "teamName":"Julio's Juice Box Boys",
+      "teamOwner":"Taylor Pubins",
+      "avatarURL":"https:\/\/i.imgur.com\/EhYdq2q.jpg"
+    },
+    {
+      "teamAbbreviation":"PUCK",
+      "teamName":"Puckett, We'll  Do it Live",
+      "teamOwner":"John Ke",
+      "avatarURL":"https:\/\/ssl.c.photoshelter.com\/img-get2\/I00004ntiCbTZgIo\/fit=1000x750\/Puckett-Kirby-1991-WS-05.jpg"
+    },
+    {
+      "teamAbbreviation":"DIRT",
+      "teamName":"Pablo Sanchez's",
+      "teamOwner":"Tanner Pubins",
+      "avatarURL":"https:\/\/pbs.twimg.com\/profile_images\/437098266979627008\/fMSRJa_q.jpeg"
+    },
+    {
+      "teamAbbreviation":"AROD",
+      "teamName":"Hispanic  Legend",
+      "teamOwner":"Alejandro Rodriguez",
+      "avatarURL":"https:\/\/mlb.mlb.com\/det\/images\/ballpark\/480x200_main.jpg"
+    },
+    {
+      "teamAbbreviation":"OVO",
+      "teamName":"October's  Very Own",
+      "teamOwner":"Peter  Ingraham",
+      "avatarURL":"https:\/\/images.livemixtapes.com\/artists\/ovo\/drake-6_god\/cover.jpg"
+    },
+    {
+      "teamAbbreviation":"TONE",
+      "teamName":"Toner from Minnesota",
+      "teamOwner":"Tony Blustein",
+      "avatarURL":"https:\/\/content.sportslogos.net\/logos\/53\/65\/full\/h7yvwsji2bngl8v6n0o4o3x9k.gif"
+    },
+    {
+      "teamAbbreviation":"BUCS",
+      "teamName":"Bucco Bandwagon",
+      "teamOwner":"Jon Ostheim",
+      "avatarURL":"data:image\/gif;base64,R0lGODlhAQABAIAAAAAAAP\/\/\/yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+    },
+    {
+      "teamAbbreviation":"ACUN",
+      "teamName":"Acuna Matata",
+      "teamOwner":"Ethan Norcott",
+      "avatarURL":"https:\/\/images.thestar.com\/CNReGkpfAWxBv1qtQ0t8gzkOQpY=\/1200x943\/smart\/filters:cb(1618587876855)\/https:\/\/www.thestar.com\/content\/dam\/thestar\/sports\/baseball\/2021\/04\/16\/ronald-acua-jr-is-a-new-terrifying-type-of-leadoff-hitter\/ronald_acuna.jpg"
+    },
+    {
+      "teamAbbreviation":"POPO",
+      "teamName":"Campus  Popo",
+      "teamOwner":"David Pubins",
+      "avatarURL":"https:\/\/img.ifunny.co\/images\/72d7878fc65c1a7ad521c32d9c949e89ef8e3bff2e9b616203fc1e3c4ee33e0e_1.jpg"
+    },
+    {
+      "teamAbbreviation":"WMM",
+      "teamName":"Wolfey's Miracle Makers",
+      "teamOwner":"Ethan Wolfe",
+      "avatarURL":"data:image\/gif;base64,R0lGODlhAQABAIAAAAAAAP\/\/\/yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+    }
+  ]
+}
