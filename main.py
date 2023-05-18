@@ -27,20 +27,24 @@ def pullData():
     driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     # fetch data
     driver.get(myLgURL)
+    print("successfully navigated to " + myLgURL)
     driver.implicitly_wait(5)
     # get managers table
     managersTable = driver.find_element(By.CLASS_NAME, "Table").get_attribute("outerHTML")
+    print("successfully pulled managers table")
     driver.close()
+    print("successfully closed chrome driver")
     
     # Parse the HTML using BeautifulSoup
     soup = BeautifulSoup(managersTable, 'html.parser')
     # find the column index for the table header "MANAGER NAME"
     # Find the table header associated with the desired column
     desired_header = 'MANAGER NAME'
-    header_cell = soup.find('th', text=desired_header)
+    header_cell = soup.find('th', string=desired_header)
 
     # Find the index of the header cell among its siblings
     column_index = header_cell.parent.index(header_cell)
+    print("found column index of " + desired_header + ": " + str(column_index))
     
     # Get the table rows
     table_rows = soup.find("tbody").find_all("tr") # tbody is used to skip the header row
@@ -58,6 +62,7 @@ def pullData():
         new_row = pd.Series(tmDetails, index=df.columns)
         # Use loc indexer to append the Series to the DataFrame
         df.loc[len(df)] = new_row
+        print("successfully added " + tmDetails[1] + " to dataframe")
         
     print(df)
     
