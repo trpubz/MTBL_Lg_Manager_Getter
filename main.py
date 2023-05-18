@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 
 import pandas as pd
 import lxml # required for pd.read_html
+import os
 
 # set league ID
 lgID = "10998"
@@ -59,8 +60,16 @@ def pullData():
         df.loc[len(df)] = new_row
         
     print(df)
+    
+    # find the system path to /Shared/BaseballHQ/resources
+    directory = '/Users/Shared/BaseballHQ/resources'
+    filename = 'lgmngrs.json'
+    full_path = os.path.join(directory, filename)
+
     # write to json file
-    df.to_json("lgmngrs.json", index=False, orient="table", indent=2)
+    # orienting on table addes schema information to the json file
+    df.to_json(full_path, index=False, orient="table", indent=2)
+    print("JSON file created successfully...")
 
 if __name__ == '__main__':
     pullData()
