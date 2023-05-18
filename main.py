@@ -67,7 +67,7 @@ def pullData():
     print(df)
     
     # find the system path to /Shared/BaseballHQ/resources
-    directory = '/Users/Shared/BaseballHQ/resources'
+    directory = '/Users/Shared/BaseballHQ/resources/extract'
     filename = 'lgmngrs.json'
     full_path = os.path.join(directory, filename)
 
