@@ -1,9 +1,6 @@
-# author: pubins.taylor
-# modified date: 18MAY2023
-# description: This script pulls data from ESPN Fantasy Baseball League and outputs a JSON file
-#              containing the team abbreviation, team name, team owner, and team avatar URL.
-#              The JSON file is used in the next step of my custom ETL pipeline as a keying device for league rosters pull.
-# selenium 4
+# author: pubins.taylor modified date: 18MAY2023 description: This script pulls data from ESPN Fantasy Baseball
+# League and outputs a JSON file containing the team abbreviation, team name, team owner, and team avatar URL. The
+# JSON file is used in the next step of my custom ETL pipeline as a keying device for league rosters pull. selenium 4
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -11,12 +8,12 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
 import pandas as pd
-import lxml # required for pd.read_html
 import os
 
 # set league ID
 lgID = "10998"
 myLgURL = "https://fantasy.espn.com/baseball/tools/leaguemembers?leagueId=" + lgID
+
 
 # Pulls data from ESPN Fantasy Baseball League
 def pullData():
@@ -34,7 +31,7 @@ def pullData():
     print("successfully pulled managers table")
     driver.close()
     print("successfully closed chrome driver")
-    
+
     # Parse the HTML using BeautifulSoup
     soup = BeautifulSoup(managersTable, 'html.parser')
     # find the column index for the table header "MANAGER NAME"
@@ -45,27 +42,25 @@ def pullData():
     # Find the index of the header cell among its siblings
     column_index = header_cell.parent.index(header_cell)
     print("found column index of " + desired_header + ": " + str(column_index))
-    
+
     # Get the table rows
-    table_rows = soup.find("tbody").find_all("tr") # tbody is used to skip the header row
+    table_rows = soup.find("tbody").find_all("tr")  # tbody is used to skip the header row
     # Create a new DataFrame
     df = pd.DataFrame(columns=["teamAbbreviation", "teamName", "teamOwner", "avatarURL"])
     # Print the found elements
     for team in table_rows:
-        tmDetails = []
-        tmDetails.append(team.find(class_="teamAbbrev").text) #  team abbreviation
-        tmDetails.append(team.find(class_="teamName").text) # team name
-        tmDetails.append(team.find_all('td')[column_index].text) # team owner
-        tmDetails.append(team.find(class_=["image-custom","team-logo"]).find("img")["src"]) # team avatar
-        
+        tmDetails = [team.find(class_="teamAbbrev").text, team.find(class_="teamName").text,
+                     team.find_all('td')[column_index].text,
+                     team.find(class_=["image-custom", "team-logo"]).find("img")["src"]]
+
         # Create a Series to append
         new_row = pd.Series(tmDetails, index=df.columns)
         # Use loc indexer to append the Series to the DataFrame
         df.loc[len(df)] = new_row
         print("successfully added " + tmDetails[1] + " to dataframe")
-        
+
     print(df)
-    
+
     # find the system path to /Shared/BaseballHQ/resources
     directory = '/Users/Shared/BaseballHQ/resources/extract'
     filename = 'lgmngrs.json'
@@ -75,6 +70,7 @@ def pullData():
     # orienting on table addes schema information to the json file
     df.to_json(full_path, index=False, orient="table", indent=2)
     print("JSON file created successfully...")
+
 
 if __name__ == '__main__':
     pullData()
