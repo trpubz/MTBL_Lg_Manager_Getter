@@ -3,7 +3,7 @@
 # description: This script pulls data from ESPN Fantasy Baseball
 # League and outputs a JSON file containing the team abbreviation, team name, team owner, and team avatar URL. The
 # JSON file is used in the next step of my custom ETL pipeline as a keying device for league rosters pull. selenium 4
-# v 1.1.0
+# v 1.1.1
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
