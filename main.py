@@ -1,8 +1,14 @@
-# author: pubins.taylor modified date: 18MAY2023 description: This script pulls data from ESPN Fantasy Baseball
+# author: pubins.taylor
+# modified date: 07 JUN 2023
+# description: This script pulls data from ESPN Fantasy Baseball
 # League and outputs a JSON file containing the team abbreviation, team name, team owner, and team avatar URL. The
 # JSON file is used in the next step of my custom ETL pipeline as a keying device for league rosters pull. selenium 4
+# v 1.1.0
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
@@ -16,21 +22,21 @@ myLgURL = "https://fantasy.espn.com/baseball/tools/leaguemembers?leagueId=" + lg
 
 
 # Pulls data from ESPN Fantasy Baseball League
-def pullData():
-    # set up headless chrome driver
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    # ChromeDriverManager().install() downloads latest version of chrome driver to avoid compatibility issues
-    driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
+def pullData(sdrvr: webdriver.Chrome):
     # fetch data
-    driver.get(myLgURL)
+    sdrvr.get(myLgURL)
     print("successfully navigated to " + myLgURL)
-    driver.implicitly_wait(5)
+    sdrvr.implicitly_wait(5)
     # get managers table
-    managersTable = driver.find_element(By.CLASS_NAME, "Table").get_attribute("outerHTML")
-    print("successfully pulled managers table")
-    driver.close()
-    print("successfully closed chrome driver")
+    try:
+        managersTable = WebDriverWait(sdrvr, 7).until(
+                            EC.presence_of_element_located((By.CLASS_NAME, "Table"))).get_attribute("outerHTML")
+    except Exception as e:
+        exit(f"ERROR: could not find managers table. {e}")
+
+    print("successfully found managers table")
+    sdrvr.quit()
+    print("closed chrome driver")
 
     # Parse the HTML using BeautifulSoup
     soup = BeautifulSoup(managersTable, 'html.parser')
@@ -59,7 +65,7 @@ def pullData():
         df.loc[len(df)] = new_row
         print("successfully added " + tmDetails[1] + " to dataframe")
 
-    print(df)
+    print("successfully added all teams to dataframe")
 
     # find the system path to /Shared/BaseballHQ/resources
     directory = '/Users/Shared/BaseballHQ/resources/extract'
@@ -72,5 +78,21 @@ def pullData():
     print("JSON file created successfully...")
 
 
+def buildDriver(headless=True) -> webdriver.Chrome:
+    # set up headless chrome driver
+    options = webdriver.ChromeOptions()
+    if headless:
+        options.add_argument("--headless")
+    # ChromeDriverManager().install() downloads latest version of chrome driver to avoid compatibility issues
+    return webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
+
+
+def main():
+    print("\n---starting Lg_Manager_Getter---")
+    sdrvr = buildDriver(headless=True)
+    pullData(sdrvr)
+    print("\n---finished Lg_Manager_Getter---")
+
+
 if __name__ == '__main__':
-    pullData()
+    main()
