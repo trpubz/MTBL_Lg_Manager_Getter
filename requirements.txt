@@ -1,5 +1,5 @@
 beautifulsoup4==4.12.2
 lxml==4.9.2
 pandas==2.0.1
-selenium==4.9.1
-webdriver_manager==3.8.6
+selenium>=4.11
+DriverKit @ git+https://github.com/trpubz/SeleniumDriverKit.git@v0.2.0
