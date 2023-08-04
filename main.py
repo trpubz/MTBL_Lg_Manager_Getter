@@ -1,15 +1,14 @@
 # author: pubins.taylor
-# modified date: 07 JUN 2023
+# modified date: 04 AUG 2023
 # description: This script pulls data from ESPN Fantasy Baseball
 # League and outputs a JSON file containing the team abbreviation, team name, team owner, and team avatar URL. The
 # JSON file is used in the next step of my custom ETL pipeline as a keying device for league rosters pull. selenium 4
-# v 1.1.1
+# v2.0.0
+from driverkit.DriverKit import DKDriverConfig
 
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
@@ -79,12 +78,8 @@ def pullData(sdrvr: webdriver.Chrome):
 
 
 def buildDriver(headless=True) -> webdriver.Chrome:
-    # set up headless chrome driver
-    options = webdriver.ChromeOptions()
-    if headless:
-        options.add_argument("--headless")
-    # ChromeDriverManager().install() downloads latest version of chrome driver to avoid compatibility issues
-    return webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
+    driver, _ = DKDriverConfig(headless=headless)
+    return driver
 
 
 def main():
