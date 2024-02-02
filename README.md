@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/trpubz/MTBL_Lg_Manager_Getter/graph/badge.svg?token=9QD3SE4NNQ)](https://codecov.io/gh/trpubz/MTBL_Lg_Manager_Getter)
+[![Python application](https://github.com/trpubz/MTBL_Lg_Manager_Getter/actions/workflows/python-app.yml/badge.svg)](https://github.com/trpubz/MTBL_Lg_Manager_Getter/actions/workflows/python-app.yml)
 # MTBL League Manager Getter
 
 
