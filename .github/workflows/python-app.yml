@@ -41,10 +41,6 @@ jobs:
         
     - name: List files in the repository
       run: ls -la
-
-    - name: Add MTBL_LGID ENV var
-      run: |
-        export MTBL_LGID='10998'
         
     - name: Install dependencies
       run: |
@@ -60,6 +56,8 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest+coverage
+      env:
+        MTBL_LGID: '10998'
       run: |
         coverage run -m pytest
         coverage xml
