@@ -41,7 +41,7 @@ jobs:
         
     - name: Add .venv directory to the PATH
       run: |
-        # cd MTBL_Lg_Manager_Getter
+        cd app
         mkdir .venv
         
     - name: List files in the repository
