@@ -39,11 +39,6 @@ jobs:
       with:
         python-version: "3.12"
         
-    - name: Add .venv directory to the PATH
-      run: |
-        cd app
-        mkdir .venv
-        
     - name: List files in the repository
       run: ls -la
 
