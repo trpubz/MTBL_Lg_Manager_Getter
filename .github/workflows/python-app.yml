@@ -39,13 +39,13 @@ jobs:
       with:
         python-version: "3.12"
         
-    - name: List files in the repository
-      run: ls -la
-      
     - name: Add .venv directory to the PATH
       run: |
         # cd MTBL_Lg_Manager_Getter
         mkdir .venv
+        
+    - name: List files in the repository
+      run: ls -la
 
     - name: Add MTBL_LGID ENV var
       run: |
