@@ -52,7 +52,7 @@ jobs:
 
     - name: Test with pytest+coverage
       run: |
-        overage run -m pytest
+        coverage run -m pytest
         coverage xml
 
     - name: Upload coverage to Codecov
