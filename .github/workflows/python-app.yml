@@ -46,6 +46,10 @@ jobs:
       run: |
         # cd MTBL_Lg_Manager_Getter
         mkdir .venv
+
+    - name: Add MTBL_LGID ENV var
+      run: |
+        export MTBL_LGID='10998'
         
     - name: Install dependencies
       run: |
