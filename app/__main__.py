@@ -13,18 +13,26 @@ import argparse
 from mtbl_savekit.exporter import export_dataframe
 from app.driver_builder.driver_builder import build_driver
 from app.manager_getter.manager_getter import get_managers
+from mtbl_globals import ETLType
 
 
-def main(lg_id):
+def main(lg_id: str, etl_type: ETLType):
     """
     Build the driver and get the managers for a given league and export
+    :param etl_type: PRE_SZN or REG_SZN
     :param lg_id: ESPN league ID
     :return: None
     """
     print("\n---starting Lg_Manager_Getter---\n")
     driver = build_driver()
     managers_df = get_managers(driver, lg_id)
+    if etl_type == ETLType.REG_SZN:
+        managers_df = get_stats(driver, lg_id)
+
+    driver.close()
+
     export_dataframe(managers_df, "lgmngrs", ".json")
+
     print("\n---finished Lg_Manager_Getter---")
 
 
@@ -35,5 +43,12 @@ if __name__ == '__main__':
         type=str, help="League ID",
         default=os.getenv("MTBL_LGID", 'default value'))
 
+    parser.add_argument(
+        "--etl-type",
+        type=ETLType.from_string,
+        choices=list(ETLType),
+        help="ETL Type; PRE_SZN or REG_SZN",
+        default=ETLType.REG_SZN)
+
     args = parser.parse_args()
-    main(args.lgID)
+    main(args.lgID, args.etl_type)

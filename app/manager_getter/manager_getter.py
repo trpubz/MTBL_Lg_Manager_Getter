@@ -1,8 +1,8 @@
 """
 author: pubins.taylor
-modified date: 1 FEB 2024
+modified date: 30 MAR 2024
 description: This module gets the manager data from ESPN Fantasy Baseball
-v0.2.0
+v0.2.1
 """
 import logging
 
@@ -35,8 +35,6 @@ def get_managers(driver: webdriver.Chrome, lg_id: str) -> DataFrame:
     except TimeoutException as te:
         logging.error("ERROR: could not find managers table. %s", te)
         raise
-
-    driver.quit()
 
     return parse_managers(managers_table)
 
