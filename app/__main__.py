@@ -1,11 +1,11 @@
 """
 author: pubins.taylor
-modified date: 30 JAN 2024
+modified date: 30 MAR 2024
 description: This script pulls data from ESPN
 Fantasy Baseball League and outputs a JSON file containing the team abbreviation, team name,
 team owner, and team avatar URL. The JSON file is used in the next step of my custom ETL
 pipeline as a keying device for league rosters pull.
-v3.0.0
+v4.0.0
 """
 import os
 import argparse

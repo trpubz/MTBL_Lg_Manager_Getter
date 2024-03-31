@@ -3,22 +3,17 @@ author: pubins.taylor
 modified date: 30 MAR 2024
 description: This module gets the manager stats and append it to Dataframe from ESPN Fantasy
 Baseball
-v0.1.
+v0.1.0
 """
 import logging
 from io import StringIO
-from time import sleep
 
 import pandas as pd
 from selenium import webdriver
 from selenium.common import TimeoutException
-from selenium.webdriver import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup
-
-from credentials import creds
 
 ESPN_STATS_BASE_URL = "https://fantasy.espn.com/baseball/league/standings?leagueId="
 
