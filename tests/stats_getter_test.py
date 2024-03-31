@@ -3,9 +3,9 @@ import os
 import pandas as pd
 import pytest
 
-from driver_builder import build_driver
-from manager_getter import get_managers
-from stats_getter import get_manager_stats
+from app.src.driver_builder import build_driver
+from app.src.manager_getter import get_managers
+from app.src.stats_getter import get_manager_stats
 
 
 class TestStatsGetter:
@@ -20,3 +20,4 @@ class TestStatsGetter:
         stats_df = get_manager_stats(self.driver, os.getenv("MTBL_LGID"), self.managers)
 
         assert stats_df.__class__ == pd.DataFrame
+        assert stats_df.shape[0] == len(self.managers)

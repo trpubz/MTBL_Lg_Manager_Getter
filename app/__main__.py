@@ -11,9 +11,10 @@ import os
 import argparse
 
 from mtbl_savekit.exporter import export_dataframe
-from app.driver_builder.driver_builder import build_driver
-from app.manager_getter.manager_getter import get_managers
-from mtbl_globals import ETLType
+from app.src.driver_builder import build_driver
+from app.src.manager_getter import get_managers
+from app.src.mtbl_globals import ETLType
+from app.src.stats_getter import get_manager_stats
 
 
 def main(lg_id: str, etl_type: ETLType):
@@ -27,11 +28,11 @@ def main(lg_id: str, etl_type: ETLType):
     driver = build_driver()
     managers_df = get_managers(driver, lg_id)
     if etl_type == ETLType.REG_SZN:
-        managers_df = get_stats(driver, lg_id)
+        managers_df = get_manager_stats(driver, lg_id, managers_df)
 
     driver.close()
 
-    export_dataframe(managers_df, "lgmngrs", ".json")
+    export_dataframe(managers_df, "lg_managers", ".json")
 
     print("\n---finished Lg_Manager_Getter---")
 

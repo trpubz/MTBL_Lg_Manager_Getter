@@ -1,5 +1,4 @@
-import pytest
-from app.driver_builder.driver_builder import build_driver
+from app.src.driver_builder import build_driver
 
 
 class TestDriverBuilder:
