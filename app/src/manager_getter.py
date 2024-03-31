@@ -1,8 +1,8 @@
 """
 author: pubins.taylor
-modified date: 1 FEB 2024
+modified date: 30 MAR 2024
 description: This module gets the manager data from ESPN Fantasy Baseball
-v0.2.0
+v0.2.1
 """
 import logging
 
@@ -36,8 +36,6 @@ def get_managers(driver: webdriver.Chrome, lg_id: str) -> DataFrame:
         logging.error("ERROR: could not find managers table. %s", te)
         raise
 
-    driver.quit()
-
     return parse_managers(managers_table)
 
 
@@ -58,9 +56,11 @@ def parse_managers(managers_table) -> pd.DataFrame:
     df = pd.DataFrame(columns=["teamAbbreviation", "teamName", "teamOwner", "avatarURL"])
 
     for team in table_rows:
-        team_details = [team.find(class_="teamAbbrev").text, team.find(class_="teamName").text,
-                     team.find_all('td')[column_index].text,
-                     team.find(class_=["image-custom", "team-logo"]).find("img")["src"]]
+        # replace any double space to single space
+        team_name = team.find(class_="teamName").text.replace("  ", " ")
+        team_details = [team.find(class_="teamAbbrev").text, team_name,
+                        team.find_all('td')[column_index].text,
+                        team.find(class_=["image-custom", "team-logo"]).find("img")["src"]]
 
         # Create a Series to append
         new_row = pd.Series(team_details, index=df.columns)

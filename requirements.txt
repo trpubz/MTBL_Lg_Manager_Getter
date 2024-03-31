@@ -12,3 +12,5 @@ mtbl-savekit @ git+https://github.com/trpubz/MTBL_SaveKit.git@v0.1.0
 # testing
 coverage~=7.4
 pytest~=8.0
+pytest-cov
+pytest-xdist

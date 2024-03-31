@@ -1,11 +1,11 @@
 import os
 
 import pytest
+import pandas as pd
 from selenium.common import TimeoutException
 
-from app.manager_getter.manager_getter import get_managers
-from app.driver_builder.driver_builder import build_driver
-import pandas as pd
+from app.src.manager_getter import get_managers
+from app.src.driver_builder import build_driver
 
 
 class TestManagerGetter:
